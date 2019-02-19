@@ -18,6 +18,7 @@
 package com.evrencoskun.tableview;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -110,18 +111,21 @@ public class TableView extends FrameLayout implements ITableView
   {
     super(context);
     initialDefaultValues(null);
+    initialize(context);
   }
 
   public TableView(@NonNull Context context, @Nullable AttributeSet attrs)
   {
     super(context, attrs);
     initialDefaultValues(attrs);
+    initialize(context);
   }
 
   public TableView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr)
   {
     super(context, attrs, defStyleAttr);
     initialDefaultValues(null);
+    initialize(context);
   }
 
   private void initialDefaultValues(AttributeSet attrs)
@@ -168,10 +172,20 @@ public class TableView extends FrameLayout implements ITableView
     }
   }
 
-  public void initialize(final int rowHeaderWidth, final int columnHeaderHeight)
+  private void initialize(final Context context)
   {
-    mRowHeaderWidth = (int) getResources().getDimension(rowHeaderWidth);
-    mColumnHeaderHeight = (int) getResources().getDimension(columnHeaderHeight);
+    final SharedPreferences pref =
+      context.getApplicationContext().getSharedPreferences("TableView", Context.MODE_PRIVATE);
+
+    if (pref.contains("rowHeaderWidth"))
+    {
+      mRowHeaderWidth = (int) getResources().getDimension(pref.getInt("rowHeaderWidth",0));
+    }
+
+    if (pref.contains("columnHeaderHeight"))
+    {
+      mColumnHeaderHeight = (int) getResources().getDimension(pref.getInt("columnHeaderHeight",0));
+    }
 
     // Create Views
     mColumnHeaderRecyclerView = createColumnHeaderRecyclerView();
