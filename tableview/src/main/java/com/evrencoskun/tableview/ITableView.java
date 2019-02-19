@@ -40,116 +40,119 @@ import com.evrencoskun.tableview.sort.SortState;
  * Created by evrencoskun on 19/06/2017.
  */
 
-public interface ITableView {
+public interface ITableView
+{
 
-    void addView(View child, ViewGroup.LayoutParams params);
+  void addView(View child, ViewGroup.LayoutParams params);
 
-    boolean hasFixedWidth();
+  boolean hasFixedWidth();
 
-    boolean isIgnoreSelectionColors();
+  void setColumnWidth(int column, int width);
 
-    boolean isShowHorizontalSeparators();
-    
-    boolean isShowVerticalSeparators();
+  boolean isIgnoreSelectionColors();
 
-    boolean isSortable();
+  boolean isShowHorizontalSeparators();
 
-    CellRecyclerView getCellRecyclerView();
+  boolean isShowVerticalSeparators();
 
-    CellRecyclerView getColumnHeaderRecyclerView();
+  boolean isSortable();
 
-    CellRecyclerView getRowHeaderRecyclerView();
+  CellRecyclerView getCellRecyclerView();
 
-    ColumnHeaderLayoutManager getColumnHeaderLayoutManager();
+  CellRecyclerView getColumnHeaderRecyclerView();
 
-    CellLayoutManager getCellLayoutManager();
+  CellRecyclerView getRowHeaderRecyclerView();
 
-    LinearLayoutManager getRowHeaderLayoutManager();
+  ColumnHeaderLayoutManager getColumnHeaderLayoutManager();
 
-    HorizontalRecyclerViewListener getHorizontalRecyclerViewListener();
+  CellLayoutManager getCellLayoutManager();
 
-    VerticalRecyclerViewListener getVerticalRecyclerViewListener();
+  LinearLayoutManager getRowHeaderLayoutManager();
 
-    ITableViewListener getTableViewListener();
+  HorizontalRecyclerViewListener getHorizontalRecyclerViewListener();
 
-    SelectionHandler getSelectionHandler();
-    
-    ColumnSortHandler getColumnSortHandler();
+  VerticalRecyclerViewListener getVerticalRecyclerViewListener();
 
-    DividerItemDecoration getHorizontalItemDecoration();
-    
-    DividerItemDecoration getVerticalItemDecoration();
+  ITableViewListener getTableViewListener();
 
-    SortState getSortingStatus(int column);
+  SelectionHandler getSelectionHandler();
 
-    SortState getRowHeaderSortingStatus();
+  ColumnSortHandler getColumnSortHandler();
 
-    void scrollToColumnPosition(int column);
+  DividerItemDecoration getHorizontalItemDecoration();
 
-    void scrollToColumnPosition(int column, int offset);
+  DividerItemDecoration getVerticalItemDecoration();
 
-    void scrollToRowPosition(int row);
+  SortState getSortingStatus(int column);
 
-    void scrollToRowPosition(int row, int offset);
+  SortState getRowHeaderSortingStatus();
 
-    void showRow(int row);
+  void scrollToColumnPosition(int column);
 
-    void hideRow(int row);
+  void scrollToColumnPosition(int column, int offset);
 
-    boolean isRowVisible(int row);
+  void scrollToRowPosition(int row);
 
-    void showAllHiddenRows();
+  void scrollToRowPosition(int row, int offset);
 
-    void clearHiddenRowList();
+  void showRow(int row);
 
-    void showColumn(int column);
+  void hideRow(int row);
 
-    void hideColumn(int column);
+  boolean isRowVisible(int row);
 
-    boolean isColumnVisible(int column);
+  void showAllHiddenRows();
 
-    void showAllHiddenColumns();
+  void clearHiddenRowList();
 
-    void clearHiddenColumnList();
+  void showColumn(int column);
 
-    int getShadowColor();
+  void hideColumn(int column);
 
-    int getSelectedColor();
+  boolean isColumnVisible(int column);
 
-    int getUnSelectedColor();
+  void showAllHiddenColumns();
 
-    int getSeparatorColor();
+  void clearHiddenColumnList();
 
-    void sortColumn(int columnPosition, SortState sortState);
+  int getShadowColor();
 
-    void sortRowHeader(SortState sortState);
+  int getSelectedColor();
 
-    void remeasureColumnWidth(int column);
+  int getUnSelectedColor();
 
-    int getRowHeaderWidth();
+  int getSeparatorColor();
 
-    void setRowHeaderWidth(int rowHeaderWidth);
+  void sortColumn(int columnPosition, SortState sortState);
 
-    AbstractTableAdapter getAdapter();
+  void sortRowHeader(SortState sortState);
 
-    /**
-     * Filters the whole table using the provided Filter object which supports multiple filters.
-     *
-     * @param filter The filter object.
-     */
-    void filter(Filter filter);
+  void remeasureColumnWidth(int column);
 
-    /**
-     * Retrieves the FilterHandler of the TableView.
-     *
-     * @return The FilterHandler of the TableView.
-     */
-    FilterHandler getFilterHandler();
-    
-    /**
-     * Retrieves the ScrollHandler of the TableView.
-     *
-     * @return The ScrollHandler of the TableView.
-     */
-    ScrollHandler getScrollHandler();
+  int getRowHeaderWidth();
+
+  void setRowHeaderWidth(int rowHeaderWidth);
+
+  AbstractTableAdapter getAdapter();
+
+  /**
+   * Filters the whole table using the provided Filter object which supports multiple filters.
+   *
+   * @param filter The filter object.
+   */
+  void filter(Filter filter);
+
+  /**
+   * Retrieves the FilterHandler of the TableView.
+   *
+   * @return The FilterHandler of the TableView.
+   */
+  FilterHandler getFilterHandler();
+
+  /**
+   * Retrieves the ScrollHandler of the TableView.
+   *
+   * @return The ScrollHandler of the TableView.
+   */
+  ScrollHandler getScrollHandler();
 }
