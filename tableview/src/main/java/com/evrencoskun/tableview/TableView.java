@@ -18,7 +18,6 @@
 package com.evrencoskun.tableview;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -62,10 +61,6 @@ import com.evrencoskun.tableview.sort.SortState;
 
 public class TableView extends FrameLayout implements ITableView
 {
-
-  public static final String PREFERENCES_NAME = "TableView";
-  public static final String PREFERENCES_KEY_ROW_HEADER_WIDTH = "rowHeaderWidth";
-  public static final String PREFERENCES_KEY_COLUMN_HEADER_HEIGHT = "columnHeaderHeight";
 
   private static final String LOG_TAG = TableView.class.getSimpleName();
 
@@ -115,21 +110,18 @@ public class TableView extends FrameLayout implements ITableView
   {
     super(context);
     initialDefaultValues(null);
-    initialize(context);
   }
 
   public TableView(@NonNull Context context, @Nullable AttributeSet attrs)
   {
     super(context, attrs);
     initialDefaultValues(attrs);
-    initialize(context);
   }
 
   public TableView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr)
   {
     super(context, attrs, defStyleAttr);
     initialDefaultValues(null);
-    initialize(context);
   }
 
   private void initialDefaultValues(AttributeSet attrs)
@@ -176,20 +168,10 @@ public class TableView extends FrameLayout implements ITableView
     }
   }
 
-  private void initialize(final Context context)
+  public void initialize(final int rowHeaderWidth, final int columnHeaderHeight)
   {
-    final SharedPreferences pref =
-      context.getApplicationContext().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-
-    if (pref.contains(PREFERENCES_KEY_ROW_HEADER_WIDTH))
-    {
-      mRowHeaderWidth = (int) getResources().getDimension(pref.getInt(PREFERENCES_KEY_ROW_HEADER_WIDTH, 0));
-    }
-
-    if (pref.contains(PREFERENCES_KEY_COLUMN_HEADER_HEIGHT))
-    {
-      mColumnHeaderHeight = (int) getResources().getDimension(pref.getInt(PREFERENCES_KEY_COLUMN_HEADER_HEIGHT, 0));
-    }
+    mRowHeaderWidth = (int) getResources().getDimension(rowHeaderWidth);
+    mColumnHeaderHeight = (int) getResources().getDimension(columnHeaderHeight);
 
     // Create Views
     mColumnHeaderRecyclerView = createColumnHeaderRecyclerView();

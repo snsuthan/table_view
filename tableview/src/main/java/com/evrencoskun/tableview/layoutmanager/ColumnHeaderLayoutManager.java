@@ -17,11 +17,14 @@
 
 package com.evrencoskun.tableview.layoutmanager;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.evrencoskun.tableview.ITableView;
+import com.evrencoskun.tableview.adapter.recyclerview.CellRecyclerView;
 import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractViewHolder;
 import com.evrencoskun.tableview.util.TableViewUtils;
 
@@ -72,6 +75,16 @@ public class ColumnHeaderLayoutManager extends LinearLayoutManager {
             TableViewUtils.setWidth(child, cacheWidth);
         } else {
             super.measureChild(child, widthUsed, heightUsed);
+        }
+    }
+
+    public void remeasureAllChild()
+    {
+        for (int j = 0; j < getChildCount(); j++)
+        {
+            final View recyclerView = getChildAt(j);
+            recyclerView.getLayoutParams().width = WRAP_CONTENT;
+            recyclerView.requestLayout();
         }
     }
 
